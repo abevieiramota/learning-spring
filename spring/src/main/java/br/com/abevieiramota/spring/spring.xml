@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd" default-init-method="defaultInitMethod">
 
-	<bean id="ab" class="br.com.abevieiramota.spring.Ab" />
+	<bean id="basicPlayer" class="br.com.abevieiramota.spring.model.BasicPlayer"
+		scope="prototype">
+		<constructor-arg value="Basic Player" />
+		<constructor-arg ref="basicMonster" />
+	</bean>
+
+	<bean id="hardcorePlayer" class="br.com.abevieiramota.spring.model.HardcorePlayer"
+		scope="prototype">
+		<constructor-arg value="Hardcore Player" />
+		<constructor-arg ref="hardcoreMonster" />
+	</bean>
+
+	<bean id="basicMonster" class="br.com.abevieiramota.spring.model.monster.BasicMonster"
+		factory-bean="basicMonsterFactory" factory-method="getInstance" scope="prototype" />
+
+	<bean id="basicMonsterFactory"
+		class="br.com.abevieiramota.spring.model.monster.RandomBasicMonsterFactory"
+		init-method="initFactory" destroy-method="destroyFactory" />
+
+	<bean id="hardcoreMonster"
+		class="br.com.abevieiramota.spring.model.monster.HardcoreMonster"
+		factory-bean="hardcoreMonsterFactory" factory-method="getInstance"
+		scope="prototype" />
+
+	<bean id="hardcoreMonsterFactory"
+		class="br.com.abevieiramota.spring.model.monster.RandomHardcoreMonsterFactory" />
 </beans>
