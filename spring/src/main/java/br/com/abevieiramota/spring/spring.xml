@@ -3,6 +3,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
 	default-init-method="defaultInitMethod">
+	
+	<bean id="config" class="br.com.abevieiramota.spring.Configuration" />
 
 	<!-- properties namespace -->
 	<bean id="basicPlayer" class="br.com.abevieiramota.spring.model.BasicPlayer"
@@ -13,6 +15,14 @@
 			<map>
 				<entry key="nome" value="Abelardo Vieira Mota" />
 			</map>
+		</property>
+		<property name="skills">
+			<set>
+				<value>Fireball</value>
+				<value>Torrent</value>
+				<!-- null-safe accessor -->
+				<value>#{config.calculateSomething()?.toUpperCase()}</value>
+			</set>
 		</property>
 	</bean>
 
@@ -28,9 +38,11 @@
 			</bean>
 		</property>
 		<property name="skills">
+			<!-- list -->
 			<list>
 				<value>Fireball</value>
 				<value>Torrent</value>
+				<null />
 			</list>
 		</property>
 	</bean>
@@ -51,5 +63,8 @@
 		scope="prototype" />
 
 	<bean id="hardcoreMonsterFactory"
-		class="br.com.abevieiramota.spring.model.monster.RandomHardcoreMonsterFactory" />
+		class="br.com.abevieiramota.spring.model.monster.RandomHardcoreMonsterFactory">
+		<!-- SpEL -->
+		<constructor-arg value="#{config.getHardcoreMonsterBaseHp()}" />
+	</bean>
 </beans>

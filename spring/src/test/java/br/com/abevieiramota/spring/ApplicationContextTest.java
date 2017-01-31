@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 import org.junit.Test;
@@ -39,16 +40,18 @@ public class ApplicationContextTest {
 		mapEsperado.put("nome", "Abelardo Vieira Mota");
 
 		assertEquals(mapEsperado, basicPlayer.getMapParaTestarMap());
+		assertEquals(Arrays.asList("Fireball", "Torrent", null), player.getSkills());
 	}
 
 	@Test
 	public void testHardcorePlayer() {
-		Player hardcorePlayer = (Player) this.ctx.getBean("hardcorePlayer");
+		Player player = (Player) this.ctx.getBean("hardcorePlayer");
 
-		System.out.println(hardcorePlayer.getMessage());
+		System.out.println(player.getMessage());
 
-		assertEquals("Hardcore Player está playando HARDCORE", hardcorePlayer.play());
-		assertEquals(Arrays.asList("Fireball", "Torrent"), hardcorePlayer.getSkills());
+		assertEquals("Hardcore Player está playando HARDCORE", player.play());
+		assertEquals(new HashSet<String>(Arrays.asList("Fireball", "Torrent", null)),
+				new HashSet<String>(player.getSkills()));
 	}
 
 	@Test

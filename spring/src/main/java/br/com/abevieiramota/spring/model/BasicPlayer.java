@@ -1,6 +1,5 @@
 package br.com.abevieiramota.spring.model;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +14,7 @@ public class BasicPlayer implements Player {
 	private Monster monster;
 	private String message;
 	private Map<String, String> mapParaTestarMap;
+	private List<String> skills;
 
 	public BasicPlayer(String name) {
 		this.name = name;
@@ -50,7 +50,11 @@ public class BasicPlayer implements Player {
 
 	@Override
 	public List<String> getSkills() {
-		return Collections.emptyList();
+		return this.skills;
+	}
+	
+	public void setSkills(List<String> skills) {
+		this.skills = skills;
 	}
 
 	public Map<String, String> getMapParaTestarMap() {

@@ -9,11 +9,15 @@ import org.springframework.beans.factory.InitializingBean;
  */
 public class RandomHardcoreMonsterFactory implements InitializingBean, DisposableBean {
 
-	private static final int DEFAULT_HARDCORE_MONSTER_HP = 1000;
+	private int hpBase;
+	
+	public RandomHardcoreMonsterFactory(int hpBase) {
+		this.hpBase = hpBase;
+	}
 
 	public Monster getInstance() {
 
-		return new HardcoreMonster((long) (Math.random() * 1000), DEFAULT_HARDCORE_MONSTER_HP);
+		return new HardcoreMonster((long) (Math.random() * 1000), this.hpBase);
 	}
 
 	@Override

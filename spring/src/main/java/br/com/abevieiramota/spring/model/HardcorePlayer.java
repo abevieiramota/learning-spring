@@ -12,6 +12,7 @@ public class HardcorePlayer implements Player {
 	private List<String> skills;
 
 	public HardcorePlayer(String name, Monster monster) {
+		System.out.println(">>>>>>>> instanciando hardcore player hein");
 		this.name = name;
 		this.monster = monster;
 	}
