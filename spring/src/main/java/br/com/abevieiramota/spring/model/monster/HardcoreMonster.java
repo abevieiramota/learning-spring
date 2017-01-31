@@ -10,7 +10,7 @@ public class HardcoreMonster implements Monster {
 		this.strength = strength;
 		this.hp = hp;
 	}
-
+	
 	@Override
 	public long attack() {
 		this.hp -= DEFAULT_HP_ATTACK_DECREMENT;

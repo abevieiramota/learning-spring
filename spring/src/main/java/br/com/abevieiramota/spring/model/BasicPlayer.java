@@ -1,5 +1,9 @@
 package br.com.abevieiramota.spring.model;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
 import br.com.abevieiramota.spring.model.monster.Monster;
 
 /**
@@ -7,25 +11,53 @@ import br.com.abevieiramota.spring.model.monster.Monster;
  */
 public class BasicPlayer implements Player {
 
-	private String nome;
-	private Monster monstro;
-	
-	public BasicPlayer(String nome, Monster monstro) {
-		this.nome = nome;
-		this.monstro = monstro;
+	private String name;
+	private Monster monster;
+	private String message;
+	private Map<String, String> mapParaTestarMap;
+
+	public BasicPlayer(String name) {
+		this.name = name;
 	}
 
 	@Override
 	public String play() {
-		return this.nome + " está playando";
+		return this.name + " está playando";
 	}
 
 	@Override
-	public Monster getMonstro() {
-		return this.monstro;
+	public Monster getMonster() {
+		return this.monster;
 	}
-	
+
+	public void setMonster(Monster monster) {
+		this.monster = monster;
+	}
+
 	public void defaultInitMethod() {
-		System.out.println(getClass().getName() + " acabei de ser inicializado! estou sendo chamado por ter o nome do default-init-method :)))");
+		System.out.println(getClass().getName()
+				+ " acabei de ser inicializado! estou sendo chamado por ter o nome do default-init-method :)))");
+	}
+
+	@Override
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	@Override
+	public List<String> getSkills() {
+		return Collections.emptyList();
+	}
+
+	public Map<String, String> getMapParaTestarMap() {
+		return mapParaTestarMap;
+	}
+
+	public void setMapParaTestarMap(Map<String, String> mapParaTestarMap) {
+		this.mapParaTestarMap = mapParaTestarMap;
 	}
 }
