@@ -85,49 +85,72 @@
 				<form method="post" class="form-vertical  js-form-loading"
 					th:object="${vinho}">
 
-					<div class="form-group">
-						<label for="nome">Nome</label> <input id="nome" type="text"
-							class="form-control" th:field="*{nome}" />
-					</div>
+					<div class="alert alert-danger alert-dismissible" role="alert"
+						th:if="${#fields.hasAnyErrors()}">
 
-					<div class="row">
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label for="tipo">Tipo</label> <select id="tipo"
-									class="form-control" th:field="*{tipo}">
-									<option value="">Selecione o tipo</option>
-									<option th:each="tipo : ${tipos}" th:value="${tipo}" th:text="#{|tipo.${tipo}|}"></option>
-								</select>
+						<button type="button" class="close" data-dismiss="alert"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<th:block th:each="error : ${#fields.detailedErrors()}">
+							<div>
+								<i class="fa fa-exclamation-circle"></i> <span
+									th:text="${error.message}"></span>
 							</div>
-						</div>
-
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label for="valor">Valor</label> <input id="valor" type="text"
-									class="form-control" />
-							</div>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<button class="btn  btn-primary" type="submit">Salvar</button>
-					</div>
-
-				</form>
+						</th:block>
 			</div>
 
-		</section>
-
-		<footer class="aw-layout-footer  js-content">
-			<div class="container-fluid">
-				<span class="aw-footer-disclaimer">&copy; 2016 AlgaWorks.
-					Todos os direitos reservados.</span>
+			<div class="form-group">
+				<label for="nome">Nome</label> <input id="nome" type="text"
+					class="form-control" th:field="*{nome}" />
 			</div>
-		</footer>
+
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="tipo">Tipo</label> <select id="tipo"
+							class="form-control" th:field="*{tipo}">
+							<option value="">Selecione o tipo</option>
+							<option th:each="tipo : ${tipos}" th:value="${tipo}"
+								th:text="#{|tipo.${tipo}|}"></option>
+						</select>
+					</div>
+				</div>
+
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="valor">Valor</label> <input id="valor" type="text"
+							th:field="*{valor}" class="form-control js-moeda" />
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<button class="btn  btn-primary" type="submit">Salvar</button>
+			</div>
+
+			</form>
+	</div>
+
+	</section>
+
+	<footer class="aw-layout-footer  js-content">
+		<div class="container-fluid">
+			<span class="aw-footer-disclaimer">&copy; 2016 AlgaWorks.
+				Todos os direitos reservados.</span>
+		</div>
+	</footer>
 
 	</div>
 
-	<script th:src="@{assets/javascripts/vendors.min.js}"></script>
-	<script th:src="@{assets/javascripts/algaworks.min.js}"></script>
+	<script th:src="@{/assets/javascripts/vendors.min.js}"></script>
+	<script th:src="@{/assets/javascripts/algaworks.min.js}"></script>
+	<script th:src="@{/assets/vendors/jquery.masknumber.min.js}"></script>
+	<script>
+		$('.js-moeda').maskNumber({
+			decimal : ',',
+			thousands : '.'
+		});
+	</script>
 </body>
 </html>
